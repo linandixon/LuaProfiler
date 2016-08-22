@@ -89,8 +89,7 @@ double lprofC_get_seconds2(LARGE_INTEGER *nBeginTime)
 	time = ((double)(nEndTime.QuadPart - nBeginTime->QuadPart) / (double)nFreq.QuadPart) * 1000;
 #else
 	gettimeofday(&nEndTime, NULL);
-	time = 1000 * (nEndTime.tv_sec - nBeginTime->tv_sec) + nEndTime.tv_usec - nBeginTime->tv_usec;
-	time = time / 1000;
+	time = (double)(nEndTime.tv_sec * 1000 - nBeginTime->tv_sec * 1000) + (double)(nEndTime.tv_usec - nBeginTime->tv_usec) / 1000;
 #endif
 	return time;
 }
@@ -102,7 +101,8 @@ double lprofC_get_millisecond(LARGE_INTEGER *nTime)
 #ifdef _MSC_VER
 	time = ((double)(nTime->QuadPart) / (double)nFreq.QuadPart) * 1000;
 #else
-	time = nTime->tv_usec / 1000;
+	//time = nTime->tv_usec / 1000;
+	time = (double)(nTime->tv_sec * 1000) + (double)(nTime->tv_usec) / 1000;
 #endif
 	return time;
 }
@@ -114,8 +114,7 @@ double lprofC_get_interval(LARGE_INTEGER *nBeginTime, LARGE_INTEGER *nEndTime)
 #ifdef _MSC_VER
 	time = ((double)(nEndTime->QuadPart - nBeginTime->QuadPart) / (double)nFreq.QuadPart) * 1000;
 #else
-	time = 1000 * (nEndTime->tv_sec - nBeginTime->tv_sec) + nEndTime->tv_usec - nBeginTime->tv_usec;
-	time = time / 1000;
+	time = (double)(nEndTime->tv_sec * 1000 - nBeginTime->tv_sec * 1000) + (double)(nEndTime->tv_usec - nBeginTime->tv_usec) / 1000;
 #endif
 	return time;
 }
