@@ -17,7 +17,6 @@ stack.c:
 #include "stack.h"
 #include "clocks.h"
 #include "cJSON.h"
-//#include <windows.h>
 
 int MAX_CHILD_SIZE = 20;
 
@@ -32,8 +31,10 @@ double dTotalTimeConsuming = 0.0;
 int   nOutputCount = 0;
 long node_size = 0;
 int first_flush = 1;
-//time_maker_golbal_begin.QuadPart = 0;
-//time_maker_golbal_end.QuadPart = 0;
+
+FILE* outf;
+LARGE_INTEGER time_maker_golbal_begin;
+LARGE_INTEGER time_maker_golbal_end;
 
 void output(const char *format, ...) {
 	va_list ap;

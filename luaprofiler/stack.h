@@ -18,9 +18,7 @@ stack.h:
 #define MAX_FUNCTION_NAME_LENGTH 200
 #define MAX_OUTPUT_MESSAGE_LENGTH 100
 
-FILE *outf;
-LARGE_INTEGER time_maker_golbal_begin;
-LARGE_INTEGER time_maker_golbal_end;
+extern FILE *outf;
 
 typedef struct lprofS_sSTACK_RECORD lprofS_STACK_RECORD;
 
